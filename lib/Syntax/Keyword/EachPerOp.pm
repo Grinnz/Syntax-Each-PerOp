@@ -75,7 +75,7 @@ The L</each> function is exported by default.
 Returns the next key-value (or index-element) pair in list context, or
 key/index in scalar context, of the given hash or array. When the iteration has
 completed, returns an empty list, or C<undef> in scalar context. The next call
-to the same op will start a new iteration.
+in the same op (position in the code) will start a new iteration.
 
 The keys or indexes of the data structure are stored for iteration the first
 time C<each> is called in a particular location, so deleting or adding elements
@@ -109,6 +109,9 @@ core C<each> function, since it is tied to the hash or array itself. Unlike the
 core function which can be reset by calling C<keys> or C<values> on the data
 structure, it is not possible to reset this function's iterator except by
 allowing it to iterate to the end.
+
+I am not sure whether or how this function works with threads or tied
+structures.
 
 =head1 BUGS
 
