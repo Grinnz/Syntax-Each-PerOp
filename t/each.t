@@ -25,8 +25,11 @@ while (my ($i, $elem) = each @things) {
   is $things[$i], $elem, "value of $i is $elem";
   $iter++;
   if ("$]" >= 5.012) {
-    is keys(@things), 3, '3 indexes';
-    is values(@things), 3, '3 elements';
+    # string-eval to avoid compilation failures
+    eval q{
+      is keys(@things), 3, '3 indexes';
+      is values(@things), 3, '3 elements';
+    1} or die $@;
   }
   my $iter_inner;
   while (defined(my $i = each @things)) {
