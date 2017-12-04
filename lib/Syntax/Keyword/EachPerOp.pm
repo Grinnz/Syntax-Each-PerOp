@@ -73,8 +73,9 @@ The L</each> function is exported by default.
   my $index = each @array;
 
 Returns the next key-value (or index-element) pair in list context, or
-key/index in scalar context, of the given hash or array. When no more pairs
-remain, returns an empty list, or C<undef> in scalar context.
+key/index in scalar context, of the given hash or array. When the iteration has
+completed, returns an empty list, or C<undef> in scalar context. The next call
+to the same op will start a new iteration.
 
 The keys or indexes of the data structure are stored for iteration the first
 time C<each> is called in a particular location, so deleting or adding elements
@@ -95,8 +96,11 @@ L</each> calls L<keys|perlfunc/keys> internally, so do not use this version of
 each (or the core version!) within a core call to L<each|perlfunc/each> on the
 same structure.
 
-The behavior of implicitly assigning to C<$_> when called without assignment in
-a while loop condition is not supported.
+The behavior of implicitly assigning the key/index to C<$_> when called without
+assignment in a while loop condition is not supported.
+
+The C<autoderef> experimental feature (removed in perl 5.24) to allow C<each>
+to take a reference to a hash or array is also not supported.
 
 As this version of C<each> is tied to the op that calls it, if you call it
 within another loop or function and it does not complete the iteration, then it
