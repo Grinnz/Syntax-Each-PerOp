@@ -136,4 +136,5 @@ This is free software, licensed under:
 
 =head1 SEE ALSO
 
-L<Perl::Critic::Policy::Freenode::Each>
+L<Perl::Critic::Policy::Freenode::Each>,
+L<http://blogs.perl.org/users/rurban/2014/04/do-not-use-each.html>
