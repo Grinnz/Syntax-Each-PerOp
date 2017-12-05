@@ -95,8 +95,7 @@ Dan Book <dbook@cpan.org>
 
 =head1 CREDITS
 
-L<"each_pair" in Var::Pairs|Var::Pairs/"each_pair %hash"> by Damian Conway for
-inspiration.
+L<Var::Pairs/"each_pair"> by Damian Conway for inspiration.
 
 =head1 COPYRIGHT AND LICENSE
 
