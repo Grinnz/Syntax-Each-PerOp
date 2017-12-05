@@ -56,4 +56,21 @@ is 0+@things, 6, '3 elements added';
 ok !(eval 'each \%stuff; 1'), 'no hashrefs';
 ok !(eval 'each \@things; 1'), 'no arrayrefs';
 
+my $lastkey;
+$numkeys = keys %stuff;
+for my $i (1..$numkeys+2) {
+  my $iterated;
+  while (my $k = each %stuff) {
+    $iterated = 1;
+    isnt $k, $lastkey, 'different key';
+    $lastkey = $k;
+    last;
+  }
+  if ($i == $numkeys+1) {
+    ok !$iterated, 'iteration completed';
+  } else {
+    ok $iterated, 'iteration continued';
+  }
+}
+
 done_testing;
