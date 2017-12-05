@@ -18,7 +18,8 @@ my %WriteMakefileArgs = (
   "NAME" => "Syntax::Keyword::EachPerOp",
   "PREREQ_PM" => {
     "Devel::Callsite" => 0,
-    "Exporter" => 0
+    "Exporter" => 0,
+    "Scalar::Util" => 0
   },
   "TEST_REQUIRES" => {
     "ExtUtils::MakeMaker" => 0,
@@ -37,6 +38,7 @@ my %FallbackPrereqs = (
   "Exporter" => 0,
   "ExtUtils::MakeMaker" => 0,
   "File::Spec" => 0,
+  "Scalar::Util" => 0,
   "Test::More" => "0.88"
 );
 

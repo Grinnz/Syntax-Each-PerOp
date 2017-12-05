@@ -4,6 +4,7 @@ use strict;
 use warnings;
 use Exporter 'import';
 use Devel::Callsite;
+use Scalar::Util qw(refaddr reftype);
 
 our $VERSION = '0.001';
 
@@ -13,8 +14,8 @@ my %iterators;
 
 sub each (\[@%]) {
   my ($structure) = @_;
-  my $id = join '$', callsite(), context(), 0+$structure;
-  my $is_hash = ref($structure) eq 'HASH';
+  my $id = join '$', callsite(), context(), refaddr($structure);
+  my $is_hash = reftype($structure) eq 'HASH';
   $iterators{$id} = [$is_hash ? keys %$structure : 0..$#$structure]
     unless exists $iterators{$id};
   if (@{$iterators{$id}}) {
