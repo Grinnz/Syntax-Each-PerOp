@@ -84,7 +84,7 @@ The C<autoderef> experimental feature (removed in perl 5.24) to allow C<each>
 to take a reference to a hash or array is also not supported.
 
 I am not sure whether or how this function works with threads or tied
-structures.
+structures. Patches welcome.
 
 =head1 BUGS
 
