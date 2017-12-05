@@ -31,7 +31,8 @@ iterator will be shared between the loops, and furthermore, the
 L<keys|perlfunc/keys> and L<values|perlfunc/values> functions share this
 iterator and reset it when called, so can cause problems if called during such
 a loop. This module provides an L</each> function that iterates locally to the
-op itself, so it can be nested and used with C<keys> and C<values> as expected.
+op (position in the code) itself, so it can be nested and used with C<keys> and
+C<values> as expected.
 
 =head1 FUNCTIONS
 
@@ -47,7 +48,7 @@ The L</each> function is exported by default.
 Returns the next key-value (or index-element) pair in list context, or
 key/index in scalar context, of the given hash or array. When the iteration has
 completed, returns an empty list, or C<undef> in scalar context. The next call
-in the same op (position in the code) will start a new iteration.
+after completing the iteration will start a new iteration.
 
 The keys or indexes of the data structure are stored for iteration the first
 time C<each> is called in a particular location, so deleting or adding elements
