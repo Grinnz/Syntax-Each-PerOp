@@ -66,14 +66,8 @@ returned.
   while (defined(my $key = each %hash)) { # right
 
 L</each> calls L<keys|perlfunc/keys> internally, so do not use this version of
-each (or the core version!) within a core call to L<each|perlfunc/each> on the
-same structure.
-
-The behavior of implicitly assigning the key/index to C<$_> when called without
-assignment in a while loop condition is not supported.
-
-The C<autoderef> experimental feature (removed in perl 5.24) to allow C<each>
-to take a reference to a hash or array is also not supported.
+each (or the core version!) within an iteration using the core version of
+L<each|perlfunc/each> on the same structure.
 
 As this version of C<each> is tied to the op that calls it, if you call it
 within another loop or function and it does not complete the iteration, then it
@@ -82,6 +76,12 @@ core C<each> function, since it is tied to the hash or array itself. Unlike the
 core function which can be reset by calling C<keys> or C<values> on the data
 structure, it is not possible to reset this function's iterator except by
 allowing it to iterate to the end.
+
+The behavior of implicitly assigning the key/index to C<$_> when called without
+assignment in a while loop condition is not supported.
+
+The C<autoderef> experimental feature (removed in perl 5.24) to allow C<each>
+to take a reference to a hash or array is also not supported.
 
 I am not sure whether or how this function works with threads or tied
 structures.
