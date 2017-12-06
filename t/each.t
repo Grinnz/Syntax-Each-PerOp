@@ -10,8 +10,9 @@ while (my ($key, $value) = each %stuff) {
   is $stuff{$key}, $value, "value of $key is $value";
   $iter++;
   
-  is keys(%stuff), $numkeys, "$numkeys keys";
-  is values(%stuff), $numkeys, "$numkeys values";
+  is 0+@{[keys(%stuff)]}, $numkeys, "$numkeys keys";
+  is 0+@{[values(%stuff)]}, $numkeys, "$numkeys values";
+  is_deeply +{%stuff}, \%stuff, "list access";
   
   my $iter_inner;
   while (defined(my $key = each %stuff)) {
@@ -39,6 +40,8 @@ while (my ($i, $elem) = each @things) {
       is values(@things), $numkeys, "$numkeys elements";
     1} or die $@;
   }
+  
+  is_deeply [@things], \@things, "list access";
   
   my $iter_inner;
   while (defined(my $i = each @things)) {

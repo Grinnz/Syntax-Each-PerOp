@@ -12,6 +12,8 @@ Syntax::Each::PerOp - A per-op each function
     # these now will not break the loop
     my $all_keys = keys %stuff;
     my $all_values = values %stuff;
+    my %copy = %stuff;
+    my @keys_and_values = %stuff;
     # and is re-entrant
     while (my ($inner_k, $inner_v) = each %stuff) {
       ...
@@ -27,12 +29,13 @@ Syntax::Each::PerOp - A per-op each function
 
 The L<each|perlfunc/each> function can be problematic as it is implemented as
 an iterator in the hash or array itself. This means it cannot be nested as the
-iterator will be shared between the loops, and furthermore, the
+iterator will be shared between the loops. Furthermore, the
 L<keys|perlfunc/keys> and L<values|perlfunc/values> functions share this
-iterator and reset it when called, so can cause problems if called during such
-a loop. This module provides an L</each> function that iterates locally to the
-op (position in the code) itself, as well as the data structure it is called
-on, so it can be nested and used with C<keys> and C<values> as expected.
+iterator and reset it when called, as does accessing the hash in list context,
+so these cause problems during such a loop. This module provides an L</each>
+function that iterates locally to the op (position in the code) itself, as well
+as the data structure it is called on, so it can be nested in itself and will
+not be affected by list access to the hash's keys or values.
 
 =head1 FUNCTIONS
 
