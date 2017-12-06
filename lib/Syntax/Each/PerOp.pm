@@ -1,4 +1,4 @@
-package Syntax::Keyword::EachPerOp;
+package Syntax::Each::PerOp;
 
 use strict;
 use warnings;
@@ -31,11 +31,11 @@ sub each (\[@%]) {
 
 =head1 NAME
 
-Syntax::Keyword::EachPerOp - A per-op each function
+Syntax::Each::PerOp - A per-op each function
 
 =head1 SYNOPSIS
 
-  use Syntax::Keyword::EachPerOp;
+  use Syntax::Each::PerOp;
   
   while (my ($k, $v) = each %stuff) {
     # these now will not break the loop

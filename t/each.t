@@ -1,6 +1,6 @@
 use strict;
 use warnings;
-use Syntax::Keyword::EachPerOp;
+use Syntax::Each::PerOp;
 use Test::More;
 
 my %stuff = (a => 1, b => 2, c => 3, '' => 4);
