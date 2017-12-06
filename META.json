@@ -12,7 +12,7 @@
       "url" : "http://search.cpan.org/perldoc?CPAN::Meta::Spec",
       "version" : 2
    },
-   "name" : "Syntax-Keyword-EachPerOp",
+   "name" : "Syntax-Each-PerOp",
    "no_index" : {
       "directory" : [
          "eg",
@@ -56,21 +56,21 @@
       }
    },
    "provides" : {
-      "Syntax::Keyword::EachPerOp" : {
-         "file" : "lib/Syntax/Keyword/EachPerOp.pm",
+      "Syntax::Each::PerOp" : {
+         "file" : "lib/Syntax/Each/PerOp.pm",
          "version" : "0.001"
       }
    },
    "release_status" : "stable",
    "resources" : {
       "bugtracker" : {
-         "web" : "https://github.com/Grinnz/Syntax-Keyword-EachPerOp/issues"
+         "web" : "https://github.com/Grinnz/Syntax-Each-PerOp/issues"
       },
-      "homepage" : "https://github.com/Grinnz/Syntax-Keyword-EachPerOp",
+      "homepage" : "https://github.com/Grinnz/Syntax-Each-PerOp",
       "repository" : {
          "type" : "git",
-         "url" : "https://github.com/Grinnz/Syntax-Keyword-EachPerOp.git",
-         "web" : "https://github.com/Grinnz/Syntax-Keyword-EachPerOp"
+         "url" : "https://github.com/Grinnz/Syntax-Each-PerOp.git",
+         "web" : "https://github.com/Grinnz/Syntax-Each-PerOp"
       }
    },
    "version" : "0.001",

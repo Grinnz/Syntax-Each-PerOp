@@ -12,10 +12,10 @@ my %WriteMakefileArgs = (
   "CONFIGURE_REQUIRES" => {
     "ExtUtils::MakeMaker" => 0
   },
-  "DISTNAME" => "Syntax-Keyword-EachPerOp",
+  "DISTNAME" => "Syntax-Each-PerOp",
   "LICENSE" => "artistic_2",
   "MIN_PERL_VERSION" => "5.008001",
-  "NAME" => "Syntax::Keyword::EachPerOp",
+  "NAME" => "Syntax::Each::PerOp",
   "PREREQ_PM" => {
     "Devel::Callsite" => 0,
     "Exporter" => 0,
