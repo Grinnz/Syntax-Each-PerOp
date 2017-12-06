@@ -50,9 +50,9 @@ key/index in scalar context, of the given hash or array. When the iteration has
 completed, returns an empty list, or C<undef> in scalar context. The next call
 after completing the iteration will start a new iteration.
 
-The keys or indexes of the data structure are stored for iteration the first
-time C<each> is called in a particular location, so deleting or adding elements
-will not affect the ongoing iteration.
+The keys or indices of the data structure are stored for iteration when C<each>
+begins a new iteration, so deleting or adding elements will not affect an
+ongoing iteration.
 
 =head1 CAVEATS
 
@@ -65,7 +65,7 @@ returned.
   while (my $key = each %hash) {          # wrong
   while (defined(my $key = each %hash)) { # right
 
-L</each> calls L<keys|perlfunc/keys> internally when iterating over a hash, so
+C<each> calls L<keys|perlfunc/keys> internally when iterating over a hash, so
 it will reset the iterator used by the core L<each|perlfunc/each> function on
 that data structure. So it is not safe to nest this version of C<each> within
 the core C<each> function called on the same structure, just as it is not safe
