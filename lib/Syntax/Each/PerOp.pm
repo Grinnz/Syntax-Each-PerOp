@@ -72,10 +72,10 @@ The L</each> function is exported by default.
 
 =head2 each
 
-  my ($key, $value) = each %hash;
-  my $key = each %hash;
-  my ($index, $element) = each @array;
-  my $index = each @array;
+  while (my ($key, $value) = each %hash) {
+  while (defined(my $key = each %hash)) {
+  while (my ($index, $element) = each @array) {
+  while (defined(my $index = each @array) {
 
 Returns the next key-value (or index-element) pair in list context, or
 key/index in scalar context, of the given hash or array. When the iteration has
@@ -87,6 +87,31 @@ begins a new iteration, so deleting or adding elements will not affect an
 ongoing iteration.
 
 =head1 CAVEATS
+
+As this version of C<each> is tied to the op that calls it as well as the data
+structure it's called on, it will not conflict with calls on the same data
+structure in different locations in the code, but it can still conflict with
+calls in the same location. This can occur if the C<each> call is in a loop or
+function, and that code is called again on the same data structure before it
+has completed iterating, such as via a recursive function call or loop control
+operations, or if the C<each> loop had exited early. When this happens, it will
+resume the same iteration. This is also true of the core C<each> function since
+it is only tied to the data structure. However, unlike the core function which
+can be reset manually to work around this issue by calling
+L<keys|perlfunc/keys> or L<values|perlfunc/values> on the data structure, it is
+not possible to reset this function's iterator except by allowing it to iterate
+to the end.
+
+  my %fruit_colors = (...);
+  sub check_colors {
+    COLOR: foreach my $color (@_) {
+      while (my ($fruit, $fruit_color) = each %fruit_colors) {
+        last if $fruit_color eq $color;                 # boom! iteration will not restart
+        next COLOR if $fruit_color eq 'blue';           # same
+        check_colors('taupe') unless $color eq 'taupe'; # also will break this iteration
+      }
+    }
+  }
 
 Since this version of C<each> will not be implicitly wrapped in a C<defined>
 check when alone in a while loop condition, you must explicitly check if the
@@ -102,20 +127,6 @@ it will reset the iterator used by the core L<each|perlfunc/each> function on
 that data structure. So it is not safe to nest this version of C<each> within
 the core C<each> function called on the same structure, just as it is not safe
 to nest the core C<each> in itself.
-
-As this version of C<each> is tied to the op that calls it as well as the data
-structure it's called on, it will not conflict with calls on the same data
-structure in different locations in the code, but it can still conflict with
-calls in the same location. This can occur if the C<each> call is in a loop or
-function, and that code is called again on the same data structure before it
-has completed iterating, such as via a recursive function call or loop control
-operations, or if the C<each> loop had exited early. When this happens, it will
-resume the same iteration. This is also true of the core C<each> function since
-it is only tied to the data structure. However, unlike the core function which
-can be reset manually to work around this issue by calling
-L<keys|perlfunc/keys> or L<values|perlfunc/values> on the data structure, it is
-not possible to reset this function's iterator except by allowing it to iterate
-to the end.
 
 The behavior of implicitly assigning the key/index to C<$_> when called without
 assignment in a while loop condition is not supported.
